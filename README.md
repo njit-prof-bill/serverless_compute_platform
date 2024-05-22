@@ -16,4 +16,4 @@ The value propositions of this project are multifaceted:
 
 5. **Innovative Code Generation:** The platform's ability to generate and deploy code from natural language descriptions via an LLM represents a significant leap forward in software development. This feature not only accelerates development but also democratizes coding, making it accessible to a broader range of users.
 
-By delivering a robust, scalable, and user-friendly compute platform, this project aims to revolutionize the way businesses develop and deploy software. It aligns with the strategic goals of modern enterprises to innovate rapidly, reduce operational overhead, and maximize resource efficiency. We invite you to join us in this transformative journey, as we build a platform that redefines the future of serverless computing.
+By delivering a robust, scalable, and user-friendly compute platform, this project aims to revolutionize the way businesses develop and deploy software. It aligns with the strategic goals of modern enterprises to innovate rapidly, reduce operational overhead, and maximize resource efficiency.
