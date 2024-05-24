@@ -140,3 +140,9 @@ Secondary aspects include:
 7. **Documentation and Training**
    - Create comprehensive documentation for developers.
    - Provide training and support for using the platform.
+
+### Further Reading
+
+[How functions work.](./Functions.md)
+
+[Authenticating developers.](./user_registration.md)
