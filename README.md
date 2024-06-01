@@ -146,3 +146,7 @@ Secondary aspects include:
 [How functions work.](./Functions.md)
 
 [Authenticating developers.](./user_registration.md)
+
+[Managing hardware.](./Infrastructure.md)
+
+
