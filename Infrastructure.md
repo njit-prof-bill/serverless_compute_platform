@@ -322,6 +322,218 @@ resource "libvirt_cloudinit_disk" "common-init" {
      terraform apply
      ```
 
-### Summary
+### Using Terraform to Manage Docker Containers Directly
 
-By using Terraform, we can define infrastructure as code that is consistent across different environments, helping achieve the goal of cloud agnosticism. This approach allows us to provision and manage infrastructure in a repeatable and scalable way, while leveraging the specific capabilities of each cloud provider and on-premises environment.
+Using Terraform scripts to start and stop containers directly can simplify our infrastructure management and still allow us to maintain cloud agnosticism. This approach removes the need for a dedicated orchestration tool like Docker Swarm, as Terraform can manage the lifecycle of your containerized applications across multiple cloud providers and on-premises environments. Here’s how you can achieve this:
+
+### AWS Example
+
+1. **Terraform Configuration for AWS:**
+
+```hcl
+provider "aws" {
+  region = "us-west-2"
+}
+
+resource "aws_instance" "osiris_container" {
+  count         = var.container_count
+  ami           = "ami-<your-ami-id>"
+  instance_type = "t3.micro"
+
+  user_data = <<-EOF
+              #!/bin/bash
+              docker run -d --name osiris-container-${count.index} my_osiris_image
+              EOF
+
+  tags = {
+    Name = "OsirisContainer-${count.index}"
+  }
+}
+
+variable "container_count" {
+  description = "Number of containers to run"
+  default     = 1
+}
+```
+
+2. **Provisioning Containers:**
+   - Initialize Terraform and apply the configuration with the desired number of containers:
+     ```sh
+     terraform init
+     terraform apply -var "container_count=3"
+     ```
+
+### Azure Example
+
+1. **Terraform Configuration for Azure:**
+
+```hcl
+provider "azurerm" {
+  features {}
+}
+
+resource "azurerm_virtual_machine" "osiris_container" {
+  count                  = var.container_count
+  name                   = "osiris-container-${count.index}"
+  location               = azurerm_resource_group.example.location
+  resource_group_name    = azurerm_resource_group.example.name
+  network_interface_ids  = [azurerm_network_interface.example.id]
+  vm_size                = "Standard_DS1_v2"
+
+  delete_os_disk_on_termination = true
+  delete_data_disks_on_termination = true
+
+  storage_image_reference {
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "18.04-LTS"
+    version   = "latest"
+  }
+
+  storage_os_disk {
+    name              = "osdisk"
+    caching           = "ReadWrite"
+    create_option     = "FromImage"
+    managed_disk_type = "Standard_LRS"
+  }
+
+  os_profile {
+    computer_name  = "osiriscontainer-${count.index}"
+    admin_username = "<admin-username>"
+    admin_password = "<admin-password>"
+    custom_data = <<-EOF
+                  #!/bin/bash
+                  docker run -d --name osiris-container-${count.index} my_osiris_image
+                  EOF
+  }
+
+  os_profile_linux_config {
+    disable_password_authentication = false
+  }
+}
+
+variable "container_count" {
+  description = "Number of containers to run"
+  default     = 1
+}
+```
+
+2. **Provisioning Containers:**
+   - Initialize Terraform and apply the configuration with the desired number of containers:
+     ```sh
+     terraform init
+     terraform apply -var "container_count=3"
+     ```
+
+### GCP Example
+
+1. **Terraform Configuration for GCP:**
+
+```hcl
+provider "google" {
+  project = "<your-project-id>"
+  region  = "us-central1"
+}
+
+resource "google_compute_instance" "osiris_container" {
+  count        = var.container_count
+  name         = "osiris-container-${count.index}"
+  machine_type = "n1-standard-1"
+  zone         = "us-central1-a"
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-9"
+    }
+  }
+
+  network_interface {
+    network       = "default"
+    access_config = {}
+  }
+
+  metadata_startup_script = <<-EOF
+                            #!/bin/bash
+                            docker run -d --name osiris-container-${count.index} my_osiris_image
+                            EOF
+}
+
+variable "container_count" {
+  description = "Number of containers to run"
+  default     = 1
+}
+```
+
+2. **Provisioning Containers:**
+   - Initialize Terraform and apply the configuration with the desired number of containers:
+     ```sh
+     terraform init
+     terraform apply -var "container_count=3"
+     ```
+
+### On-Premises Example
+
+1. **Terraform Configuration for On-Premises using Libvirt:**
+
+```hcl
+provider "libvirt" {
+  uri = "qemu:///system"
+}
+
+resource "libvirt_domain" "osiris_container" {
+  count   = var.container_count
+  name    = "osiris-container-${count.index}"
+  memory  = "1024"
+  vcpu    = 1
+  network_interface {
+    network_name = "default"
+  }
+
+  disk {
+    volume_id = "${libvirt_volume.osiris_container_volume[count.index].id}"
+  }
+
+  cloudinit = "${libvirt_cloudinit_disk.osiris_container_cloudinit.id}"
+
+  console {
+    type        = "pty"
+    target_port = "0"
+    target_type = "serial"
+  }
+
+  user_data = <<-EOF
+              #!/bin/bash
+              docker run -d --name osiris-container-${count.index} my_osiris_image
+              EOF
+}
+
+resource "libvirt_volume" "osiris_container_volume" {
+  count = var.container_count
+  name  = "osiris-container-volume-${count.index}"
+  pool  = "default"
+  source {
+    url = "https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2"
+  }
+  format = "qcow2"
+}
+
+resource "libvirt_cloudinit_disk" "osiris_container_cloudinit" {
+  count = var.container_count
+  name  = "osiris-container-cloudinit-${count.index}.iso"
+  user_data = <<-EOF
+              #cloud-config
+              EOF
+}
+
+variable "container_count" {
+  description = "Number of containers to run"
+  default     = 1
+}
+```
+
+2. **Provisioning Containers:**
+   - Initialize Terraform and apply the configuration with the desired number of containers:
+     ```sh
+     terraform init
+     terraform apply -var "container_count=3"
+     ```
