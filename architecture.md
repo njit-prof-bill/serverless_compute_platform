@@ -93,3 +93,91 @@ The Osiris platform will be a peer-to-peer style cluster where each container ru
    - Communication between controllers is encrypted.
    - Authentication ensures that only authorized controllers can join the cluster.
    - The ledger is protected by cryptographic hashes to prevent tampering.
+
+### Detailed Components
+
+#### Core Components
+
+1. **Controller**
+   - **Description:** The Controller is the master service responsible for managing function deployments, traffic routing, load balancing, and instance scaling.
+   - **Responsibilities:**
+     - Register and deregister functions.
+     - Route incoming requests to the appropriate function instances.
+     - Monitor function execution and system load.
+     - Scale function instances up or down based on demand.
+     - Maintain the in-memory index ledger of all running functions.
+
+2. **CLI (Command Line Interface)**
+   - **Description:** The CLI is a client-side tool for developers to manage the Osiris platform, including function deployment, monitoring, and scaling.
+   - **Responsibilities:**
+     - Deploy new functions to the platform.
+     - Update or remove existing functions.
+     - Retrieve logs and performance metrics.
+     - Manage user roles and permissions.
+
+3. **Client-SDK**
+   - **Description:** The Client-SDK is a set of libraries that developers use to call Osiris functions from their applications. It handles serialization of function calls into API requests and deserialization of responses.
+   - **Responsibilities:**
+     - Look up functions by name.
+     - Serialize function arguments into JSON.
+     - Make API calls to the Controller.
+     - Deserialize API responses into function return values.
+
+4. **Function-SDK**
+   - **Description:** The Function-SDK is used on the server side to handle incoming API requests, deserialize them into function calls, and serialize the return values into API responses.
+   - **Responsibilities:**
+     - Deserialize API requests into function arguments.
+     - Invoke the appropriate function with the deserialized arguments.
+     - Serialize function return values into JSON responses.
+
+5. **Dockerfile**
+   - **Description:** Dockerfiles describe the container images for deploying the Osiris platform and its functions.
+   - **Responsibilities:**
+     - Define the environment and dependencies for the Controller, function instances, and other components.
+     - Ensure consistent and reproducible deployments across different environments.
+
+6. **Terraform**
+   - **Description:** Terraform scripts define the infrastructure needed to deploy Osiris on various cloud providers or on-premises environments.
+   - **Responsibilities:**
+     - Provision the necessary compute, storage, and networking resources.
+     - Manage infrastructure as code for versioning and reproducibility.
+     - Ensure cloud-agnostic deployment capabilities.
+
+#### Key Data Stores
+
+1. **Function Library**
+   - **Description:** The function library is a repository of all functions written for the Osiris platform. These functions are stored as executables.
+   - **Responsibilities:**
+     - Store function code and metadata.
+     - Provide versioning and rollback capabilities.
+     - Serve function executables to instances as needed.
+
+2. **Index Ledger**
+   - **Description:** The index ledger is an in-memory data store that lists all functions running throughout the system. It is kept in sync across all servers.
+   - **Responsibilities:**
+     - Track the state and location of all running function instances.
+     - Provide quick lookups for the Controller to route requests.
+     - Synchronize state changes across all instances to ensure consistency.
+
+### Workflow
+
+1. **Function Deployment**
+   - Developer writes a function and uses the CLI to deploy it to Osiris.
+   - The function is registered with the Controller and stored in the function library.
+   - The function’s metadata is added to the index ledger.
+
+2. **Function Invocation**
+   - A client application calls a function using the Client-SDK.
+   - The Client-SDK serializes the request and sends it to the Controller.
+   - The Controller routes the request to the appropriate function instance.
+   - The Function-SDK on the server deserializes the request and invokes the function.
+   - The function executes and returns a result.
+   - The Function-SDK serializes the result and sends it back to the Controller.
+   - The Controller sends the response back to the Client-SDK.
+   - The Client-SDK deserializes the response and returns it to the calling application.
+
+3. **Scaling and Load Management**
+   - The Controller monitors function load and demand.
+   - When demand increases, the Controller starts additional instances of the required functions.
+   - When demand decreases, the Controller shuts down idle instances.
+   - The index ledger is updated to reflect the current state of all function instances.
