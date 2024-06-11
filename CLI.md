@@ -65,6 +65,16 @@ The CLI for Osiris should provide a comprehensive set of commands to manage the 
 
 #### 4. **Administrative Commands**
 
+1. **Start Platform**
+    - **Command:** `osiris start`
+    - **Description:** Starts the Osiris platform by initializing the necessary containers.
+    - **Usage:** `osiris start`
+
+1. **Stop Platform**
+    - **Command:** `osiris stop`
+    - **Description:** Gracefully shuts down all running containers of the Osiris platform.
+    - **Usage:** `osiris stop`
+
 1. **User Management**
    - **Command:** `osiris user`
    - **Description:** Manages user accounts and permissions.
@@ -103,6 +113,11 @@ The CLI for Osiris should provide a comprehensive set of commands to manage the 
 
 ### Example Usage Scenarios
 
+1. **Starting the System:**
+   ```sh
+   osiris start
+   ```
+   
 1. **Deploying a New Function:**
    ```sh
    osiris deploy ./functions/add_numbers.py --name addNumbers --runtime python3.8
@@ -136,4 +151,9 @@ The CLI for Osiris should provide a comprehensive set of commands to manage the 
 7. **Adding a New User:**
    ```sh
    osiris user add johndoe --role developer
+   ```
+
+1. **Shutting Down the System:**
+   ```sh
+   osiris stop
    ```
