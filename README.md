@@ -141,6 +141,52 @@ Secondary aspects include:
    - Create comprehensive documentation for developers.
    - Provide training and support for using the platform.
 
+### This Repository
+
+Given the structure and interdependencies of the Osiris software components, a monorepo approach can offer several advantages, such as easier management of cross-cutting concerns, consistent versioning, and simplified dependency management.
+
+#### 1. **Monorepo**
+
+**Structure:**
+```
+osiris/
+│
+├── controller/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+├── cli/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+├── client-sdk/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+├── function-sdk/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+├── infrastructure/
+│   ├── docker/
+│   │   └── Dockerfiles for common setup
+│   ├── terraform/
+│   │   └── Terraform scripts
+│   └── README.md
+│
+└── README.md
+```
+
+**Pros:**
+- **Consistency:** Easier to maintain consistent coding standards, tools, and dependencies across all components.
+- **Simplified CI/CD:** A unified CI/CD pipeline can manage the entire project, ensuring that changes in one component are automatically tested with others.
+- **Shared Code:** Common utilities and libraries can be easily shared across components.
+- **Single Source of Truth:** Easier to track issues and progress with a single repository.
+
 ### Further Reading
 
 [How functions work.](./Functions.md)
@@ -149,4 +195,4 @@ Secondary aspects include:
 
 [Managing hardware.](./Infrastructure.md)
 
-
+[Command Line Interface.](./CLI.md)
