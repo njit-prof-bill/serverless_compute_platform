@@ -141,51 +141,218 @@ Secondary aspects include:
    - Create comprehensive documentation for developers.
    - Provide training and support for using the platform.
 
-### This Repository
+### Repository Structure
 
-Given the structure and interdependencies of the Osiris software components, a monorepo approach can offer several advantages, such as easier management of cross-cutting concerns, consistent versioning, and simplified dependency management.
+Given the team structure and projects they are working on, it's important to organize the repositories to minimize the risk of merge conflicts while maintaining logical groupings and clear boundaries between different components. Here's an updated proposal for a hybrid repository structure that balances these concerns:
 
-#### 1. **Monorepo**
+#### 1. Monorepo for Core Components
 
+**Repository:** `osiris-core`
 **Structure:**
 ```
-osiris/
+osiris-core/
 │
 ├── controller/
-│   ├── src/
-│   ├── tests/
-│   └── Dockerfile
+│   ├── core/
+│   │   ├── src/
+│   │   ├── tests/
+│   │   └── Dockerfile
+│   ├── scalability/
+│   │   ├── src/
+│   │   ├── tests/
+│   │   └── Dockerfile
+│   └── README.md
 │
 ├── cli/
-│   ├── src/
-│   ├── tests/
-│   └── Dockerfile
+│   ├── core/
+│   │   ├── src/
+│   │   ├── tests/
+│   │   └── Dockerfile
+│   ├── user-management/
+│   │   ├── src/
+│   │   ├── tests/
+│   │   └── Dockerfile
+│   └── README.md
 │
 ├── client-sdk/
-│   ├── src/
-│   ├── tests/
-│   └── Dockerfile
+│   ├── core/
+│   │   ├── src/
+│   │   ├── tests/
+│   │   └── Dockerfile
+│   ├── advanced-features/
+│   │   ├── src/
+│   │   ├── tests/
+│   │   └── Dockerfile
+│   └── README.md
 │
 ├── function-sdk/
-│   ├── src/
-│   ├── tests/
-│   └── Dockerfile
-│
-├── infrastructure/
-│   ├── docker/
-│   │   └── Dockerfiles for common setup
-│   ├── terraform/
-│   │   └── Terraform scripts
+│   ├── core/
+│   │   ├── src/
+│   │   ├── tests/
+│   │   └── Dockerfile
+│   ├── performance-optimization/
+│   │   ├── src/
+│   │   ├── tests/
+│   │   └── Dockerfile
 │   └── README.md
 │
 └── README.md
 ```
 
-**Pros:**
-- **Consistency:** Easier to maintain consistent coding standards, tools, and dependencies across all components.
-- **Simplified CI/CD:** A unified CI/CD pipeline can manage the entire project, ensuring that changes in one component are automatically tested with others.
-- **Shared Code:** Common utilities and libraries can be easily shared across components.
-- **Single Source of Truth:** Easier to track issues and progress with a single repository.
+#### 2. Separate Repositories for Infrastructure and Additional Scope Components
+
+**Repository:** `osiris-infrastructure`
+**Structure:**
+```
+osiris-infrastructure/
+│
+├── docker/
+│   ├── core/
+│   ├── management/
+│   └── README.md
+│
+├── terraform/
+│   ├── scripts/
+│   └── README.md
+│
+└── README.md
+```
+
+**Repository:** `osiris-function-library`
+**Structure:**
+```
+osiris-function-library/
+│
+├── core-management/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+├── versioning-rollback/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+└── README.md
+```
+
+**Repository:** `osiris-index-ledger`
+**Structure:**
+```
+osiris-index-ledger/
+│
+├── core-implementation/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+├── synchronization-consistency/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+└── README.md
+```
+
+**Repository:** `osiris-admin-portal`
+**Structure:**
+```
+osiris-admin-portal/
+│
+├── core-features/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+├── advanced-features/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+└── README.md
+```
+
+**Repository:** `osiris-logging-monitoring`
+**Structure:**
+```
+osiris-logging-monitoring/
+│
+├── logging-service/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+├── monitoring-alerts/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+└── README.md
+```
+
+**Repository:** `osiris-security-compliance`
+**Structure:**
+```
+osiris-security-compliance/
+│
+├── auth-authorization/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+├── compliance-auditing/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+└── README.md
+```
+
+**Repository:** `osiris-integration-testing`
+**Structure:**
+```
+osiris-integration-testing/
+│
+├── testing-framework/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+├── automated-ci-cd/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+└── README.md
+```
+
+**Repository:** `osiris-documentation-support`
+**Structure:**
+```
+osiris-documentation-support/
+│
+├── documentation-guides/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+├── support-tools/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+│
+└── README.md
+```
+
+### Summary
+
+By adopting this hybrid repository structure, we can minimize merge conflicts and ensure that each team has clear boundaries and responsibilities:
+
+- **Monorepo for Core Components:** This allows for efficient management of interdependent components, ensuring consistency and simplifying cross-cutting concerns.
+- **Separate Repositories for Additional Scope Components:** These repositories allow for focused development and testing of specific subsystems, reducing the risk of conflicts and enabling independent progress.
+- **Modular Structure within Repositories:** Dividing each repository into smaller, focused sub-projects allows for clear separation of responsibilities and minimizes the risk of merge conflicts even within larger repositories.
+
+This approach should help streamline development, improve collaboration, and ensure that the Osiris platform is built efficiently and effectively within the eight-week timeframe.
 
 ### Further Reading
 
