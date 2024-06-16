@@ -363,3 +363,5 @@ This approach should help streamline development, improve collaboration, and ens
 [Managing hardware.](./Infrastructure.md)
 
 [Command Line Interface.](./CLI.md)
+
+[Network Communication](./network.md)
