@@ -181,3 +181,60 @@ The Osiris platform will be a peer-to-peer style cluster where each container ru
    - When demand increases, the Controller starts additional instances of the required functions.
    - When demand decreases, the Controller shuts down idle instances.
    - The index ledger is updated to reflect the current state of all function instances.
+
+### Inter-component Communication
+
+Below is a symmetric matrix where each cell indicates whether there is inter-component communication (Y) or not (N) between the respective components.
+
+### Symmetric Matrix for Inter-Component Communication
+
+|                   | Team 1 | Team 2 | Team 3 | Team 4 | Team 5 | Team 6 | Team 7 | Team 8 | Team 9 | Team 10 | Team 11 | Team 12 | Team 13 | Team 14 | Team 15 | Team 16 |
+|-------------------|--------|--------|--------|--------|--------|--------|--------|--------|--------|---------|---------|---------|---------|---------|---------|---------|
+| **Team 1**        | N      | Y      | Y      | Y      | Y      | Y      | Y      | Y      | Y      | Y       | Y       | Y       | Y       | Y       | Y       | Y       |
+| **Team 2**        | Y      | N      | Y      | Y      | Y      | Y      | Y      | Y      | Y      | Y       | Y       | Y       | Y       | Y       | Y       | Y       |
+| **Team 3**        | Y      | Y      | N      | Y      | Y      | Y      | Y      | Y      | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 4**        | Y      | Y      | Y      | N      | Y      | Y      | Y      | Y      | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 5**        | Y      | Y      | Y      | Y      | N      | Y      | Y      | Y      | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 6**        | Y      | Y      | Y      | Y      | Y      | N      | Y      | Y      | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 7**        | Y      | Y      | Y      | Y      | Y      | Y      | N      | Y      | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 8**        | Y      | Y      | Y      | Y      | Y      | Y      | Y      | N      | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 9**        | Y      | Y      | N      | N      | N      | N      | N      | N      | N      | Y       | N       | N       | N       | N       | N       | N       |
+| **Team 10**       | Y      | Y      | N      | N      | N      | N      | N      | N      | Y      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 11**       | Y      | Y      | N      | N      | N      | N      | N      | N      | N      | N       | N       | Y       | Y       | Y       | Y       | Y       |
+| **Team 12**       | Y      | Y      | N      | N      | N      | N      | N      | N      | N      | N       | Y       | N       | Y       | Y       | Y       | Y       |
+| **Team 13**       | Y      | Y      | N      | N      | N      | N      | N      | N      | N      | N       | Y       | Y       | N       | Y       | Y       | Y       |
+| **Team 14**       | Y      | Y      | N      | N      | N      | N      | N      | N      | N      | N       | Y       | Y       | Y       | N       | Y       | Y       |
+| **Team 15**       | Y      | Y      | N      | N      | N      | N      | N      | N      | N      | N       | Y       | Y       | Y       | Y       | N       | Y       |
+| **Team 16**       | Y      | Y      | N      | N      | N      | N      | N      | N      | N      | N       | Y       | Y       | Y       | Y       | Y       | N       |
+
+### Legend
+- **Team 1:** Controller Core Logic
+- **Team 2:** Controller Scalability and Load Balancing
+- **Team 3:** CLI Core Commands
+- **Team 4:** CLI User Management and Permissions
+- **Team 5:** Client SDK Core Functionality
+- **Team 6:** Client SDK Advanced Features
+- **Team 7:** Function SDK Core Logic
+- **Team 8:** Docker Configuration and Management
+- **Team 9:** Terraform Scripts and Infrastructure Management
+- **Team 10:** Function Library Core Management
+- **Team 11:** Function Versioning and Rollback
+- **Team 12:** Index Ledger Core Implementation
+- **Team 13:** Index Ledger Synchronization and Consistency
+- **Team 14:** Admin Portal Core Features
+- **Team 15:** Admin Portal Advanced Features
+- **Team 16:** Code Generation from Natural Language
+
+### Analysis
+
+- **Controller Teams (1 and 2)**: Communicate with almost all other teams due to their central role in managing traffic and services.
+- **CLI Teams (3 and 4)**: Communicate mainly with Controller and Client SDK teams.
+- **Client SDK Teams (5 and 6)**: Communicate with Controller and Function SDK teams.
+- **Function SDK Team (7)**: Communicates with Controller and Client SDK teams.
+- **Infrastructure Teams (8 and 9)**: Primarily interact with the Controller and each other.
+- **Function Library Teams (10 and 11)**: Interact with Index Ledger teams and Admin Portal teams.
+- **Index Ledger Teams (12 and 13)**: Interact with Function Library and Admin Portal teams.
+- **Admin Portal Teams (14 and 15)**: Interact with Function Library and Index Ledger teams.
+- **Code Generation Team (16)**: Interacts with multiple teams for integration of code generation features.
+
+This matrix helps in understanding the interdependencies between different components, allowing us to specify APIs and protocols clearly to minimize integration issues.
