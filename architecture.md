@@ -190,22 +190,22 @@ Below is a symmetric matrix where each cell indicates whether there is inter-com
 
 |                   | Team 1 | Team 2 | Team 3 | Team 4 | Team 5 | Team 6 | Team 7 | Team 8 | Team 9 | Team 10 | Team 11 | Team 12 | Team 13 | Team 14 | Team 15 | Team 16 |
 |-------------------|--------|--------|--------|--------|--------|--------|--------|--------|--------|---------|---------|---------|---------|---------|---------|---------|
-| **Team 1**        | N      | Y      | Y      | Y      | Y      | Y      | Y      | Y      | Y      | Y       | Y       | Y       | Y       | Y       | Y       | Y       |
-| **Team 2**        | Y      | N      | Y      | Y      | Y      | Y      | Y      | Y      | Y      | Y       | Y       | Y       | Y       | Y       | Y       | Y       |
-| **Team 3**        | Y      | Y      | N      | Y      | Y      | Y      | Y      | Y      | N      | N       | N       | N       | N       | N       | N       | N       |
-| **Team 4**        | Y      | Y      | Y      | N      | Y      | Y      | Y      | Y      | N      | N       | N       | N       | N       | N       | N       | N       |
-| **Team 5**        | Y      | Y      | Y      | Y      | N      | Y      | Y      | Y      | N      | N       | N       | N       | N       | N       | N       | N       |
-| **Team 6**        | Y      | Y      | Y      | Y      | Y      | N      | Y      | Y      | N      | N       | N       | N       | N       | N       | N       | N       |
-| **Team 7**        | Y      | Y      | Y      | Y      | Y      | Y      | N      | Y      | N      | N       | N       | N       | N       | N       | N       | N       |
-| **Team 8**        | Y      | Y      | Y      | Y      | Y      | Y      | Y      | N      | N      | N       | N       | N       | N       | N       | N       | N       |
-| **Team 9**        | Y      | Y      | N      | N      | N      | N      | N      | N      | N      | Y       | N       | N       | N       | N       | N       | N       |
-| **Team 10**       | Y      | Y      | N      | N      | N      | N      | N      | N      | Y      | N       | N       | N       | N       | N       | N       | N       |
-| **Team 11**       | Y      | Y      | N      | N      | N      | N      | N      | N      | N      | N       | N       | Y       | Y       | Y       | Y       | Y       |
-| **Team 12**       | Y      | Y      | N      | N      | N      | N      | N      | N      | N      | N       | Y       | N       | Y       | Y       | Y       | Y       |
-| **Team 13**       | Y      | Y      | N      | N      | N      | N      | N      | N      | N      | N       | Y       | Y       | N       | Y       | Y       | Y       |
-| **Team 14**       | Y      | Y      | N      | N      | N      | N      | N      | N      | N      | N       | Y       | Y       | Y       | N       | Y       | Y       |
-| **Team 15**       | Y      | Y      | N      | N      | N      | N      | N      | N      | N      | N       | Y       | Y       | Y       | Y       | N       | Y       |
-| **Team 16**       | Y      | Y      | N      | N      | N      | N      | N      | N      | N      | N       | Y       | Y       | Y       | Y       | Y       | N       |
+| **Team 1**        | -      | Y      | Y      | Y      | Y      | Y      | Y      | Y      | Y      | Y       | Y       | Y       | Y       | Y       | Y       | Y       |
+| **Team 2**        |        | -      | Y      | Y      | Y      | Y      | Y      | Y      | Y      | Y       | Y       | Y       | Y       | Y       | Y       | Y       |
+| **Team 3**        |        |        | -      | Y      | Y      | Y      | Y      | Y      | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 4**        |        |        |        | -      | Y      | Y      | Y      | Y      | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 5**        |        |        |        |        | -      | Y      | Y      | Y      | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 6**        |        |        |        |        |        | -      | Y      | Y      | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 7**        |        |        |        |        |        |        | -      | Y      | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 8**        |        |        |        |        |        |        |        | -      | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 9**        |        |        |        |        |        |        |        |        | -      | Y       | N       | N       | N       | N       | N       | N       |
+| **Team 10**       |        |        |        |        |        |        |        |        |        | -       | N       | N       | N       | N       | N       | N       |
+| **Team 11**       |        |        |        |        |        |        |        |        |        |         | -       | Y       | Y       | Y       | Y       | Y       |
+| **Team 12**       |        |        |        |        |        |        |        |        |        |         |         | -       | Y       | Y       | Y       | Y       |
+| **Team 13**       |        |        |        |        |        |        |        |        |        |         |         |         | -       | Y       | Y       | Y       |
+| **Team 14**       |        |        |        |        |        |        |        |        |        |         |         |         |         | -       | Y       | Y       |
+| **Team 15**       |        |        |        |        |        |        |        |        |        |         |         |         |         |         | -       | Y       |
+| **Team 16**       |        |        |        |        |        |        |        |        |        |         |         |         |         |         |         | -       |
 
 ### Legend
 - **Team 1:** Controller Core Logic
