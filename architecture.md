@@ -238,3 +238,96 @@ Below is a symmetric matrix where each cell indicates whether there is inter-com
 - **Code Generation Team (16)**: Interacts with multiple teams for integration of code generation features.
 
 This matrix helps in understanding the interdependencies between different components, allowing us to specify APIs and protocols clearly to minimize integration issues.
+
+For inter-component communication within the same device, there are alternative communication methods that can offer lower latency and be more efficient compared to network-based protocols like gRPC. Here are some potential methods to consider:
+
+### Intra-Device Communication Methods
+
+1. **Inter-Process Communication (IPC) Mechanisms**
+   - **Shared Memory:**
+     - **Pros:** Very fast as it involves direct memory access.
+     - **Cons:** Requires careful synchronization to avoid race conditions.
+   - **Sockets:**
+     - **Pros:** Familiar API, can be used both for inter-process and network communication.
+     - **Cons:** Still involves network stack overhead, though less than gRPC.
+   - **Message Queues:**
+     - **Pros:** Decouples sender and receiver, suitable for asynchronous communication.
+     - **Cons:** Slightly higher overhead than shared memory.
+   - **Pipes (Named Pipes/FIFOs):**
+     - **Pros:** Simple and efficient for unidirectional data flow.
+     - **Cons:** Less flexible, best for simple command/response patterns.
+
+2. **Local Function Calls**
+   - **Pros:** Direct and extremely fast, using the same process’s memory.
+   - **Cons:** Limited to components within the same application or service boundary.
+
+3. **In-Memory Data Structures**
+   - **Example:** Using in-memory databases like Redis when low latency and high throughput are required.
+   - **Pros:** Very fast access, suitable for state sharing.
+   - **Cons:** Overhead of maintaining the in-memory database, not as fast as direct memory access.
+
+### Recommendations for Osiris
+
+Given that Osiris will use gRPC for inter-device communication, here's a recommended approach for intra-device communication:
+
+### 1. Shared Memory or Message Queues for Performance-Critical Paths
+
+For components that require high-performance communication:
+- Use **shared memory** for the fastest access.
+- Ensure proper synchronization using semaphores or other locking mechanisms.
+- Alternatively, use **message queues** for asynchronous communication needs.
+
+### 2. Local Function Calls for Internal Module Communication
+
+For communication within the same service or module:
+- Direct **function calls** can be used where components are tightly coupled and reside within the same application boundary.
+
+### 3. Pipes for Simple Command/Response
+
+For simpler communication needs:
+- Use **named pipes** for efficient unidirectional data flow between components.
+
+### Example Use Cases in Osiris
+
+#### Controller Communication
+- **Within Controller (Core Logic and Scalability):**
+  - Use shared memory for sharing state information.
+  - Example: Shared memory segment for load balancing metrics.
+
+#### CLI and Client SDK
+- **CLI Commands to Controller:**
+  - Use named pipes or local function calls for issuing commands.
+  - Example: Named pipes for sending command requests to the controller.
+
+#### Function SDK
+- **Function Execution Coordination:**
+  - Use message queues for coordinating function execution within the same device.
+  - Example: Message queue for function request handling within the Function SDK.
+
+### Revised Matrix with Communication Methods
+
+|                   | Team 1 | Team 2 | Team 3 | Team 4 | Team 5 | Team 6 | Team 7 | Team 8 | Team 9 | Team 10 | Team 11 | Team 12 | Team 13 | Team 14 | Team 15 | Team 16 |
+|-------------------|--------|--------|--------|--------|--------|--------|--------|--------|--------|---------|---------|---------|---------|---------|---------|---------|
+| **Team 1**        | N      | Y (SM) | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   |
+| **Team 2**        | Y (SM) | N      | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   |
+| **Team 3**        | Y (P)  | Y (P)  | N      | Y (F)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 4**        | Y (P)  | Y (P)  | Y (F)  | N      | Y (P)  | Y (P)  | Y (P)  | Y (P)  | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 5**        | Y (P)  | Y (P)  | Y (P)  | Y (P)  | N      | Y (F)  | Y (P)  | Y (P)  | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 6**        | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (F)  | N      | Y (P)  | Y (P)  | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 7**        | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | N      | Y (P)  | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 8**        | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | N      | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 9**        | Y (P)  | Y (P)  | N      | N      | N      | N      | N      | N      | N      | Y (P)   | N       | N       | N       | N       | N       | N       |
+| **Team 10**       | Y (P)  | Y (P)  | N      | N      | N      | N      | N      | N      | Y (P)  | N       | N       | N       | N       | N       | N       | N       |
+| **Team 11**       | Y (P)  | Y (P)  | N      | N      | N      | N      | N      | N      | N      | N       | N       | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   |
+| **Team 12**       | Y (P)  | Y (P)  | N      | N      | N      | N      | N      | N      | N      | N       | Y (P)   | N       | Y (P)   | Y (P)   | Y (P)   | Y (P)   |
+| **Team 13**       | Y (P)  | Y (P)  | N      | N      | N      | N      | N      | N      | N      | N       | Y (P)   | Y (P)   | N       | Y (P)   | Y (P)   | Y (P)   |
+| **Team 14**       | Y (P)  | Y (P)  | N      | N      | N      | N      | N      | N      | N      | N       | Y (P)   | Y (P)   | Y (P)   | N       | Y (P)   | Y (P)   |
+| **Team 15**       | Y (P)  | Y (P)  | N      | N      | N      | N      | N      | N      | N      | N       | Y (P)   | Y (P)   | Y (P)   | Y (P)   | N       | Y (P)   |
+| **Team 16**       | Y (P)  | Y (P)  | N      | N      | N      | N      | N      | N      | N      | N       | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   | N       |
+
+### Legend
+- **SM:** Shared Memory
+- **P:** Pipes (Named Pipes)
+- **F:** Function Calls
+
+By using a mix of shared memory, named pipes, and local function calls for intra-device communication, Osiris can achieve high efficiency and low latency in scenarios where components reside on the same device. For inter-device
