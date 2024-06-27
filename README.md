@@ -365,3 +365,5 @@ This approach should help streamline development, improve collaboration, and ens
 [Command Line Interface.](./CLI.md)
 
 [Network Communication](./network.md)
+
+[Architecture](./architecture.md)
