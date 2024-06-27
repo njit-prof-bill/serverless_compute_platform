@@ -331,3 +331,202 @@ For simpler communication needs:
 - **F:** Function Calls
 
 By using a mix of shared memory, named pipes, and local function calls for intra-device communication, Osiris can achieve high efficiency and low latency in scenarios where components reside on the same device. For inter-device
+
+### Detailed Description of Shared Memory Communication
+
+#### Overview
+
+Shared memory is an efficient method of communication between processes running on the same device. It involves allocating a portion of memory that multiple processes can access concurrently. For Osiris, shared memory will be used for high-performance communication between the Controller Core Logic (Team 1) and the Controller Scalability and Load Balancing (Team 2).
+
+#### Key Components
+
+1. **Shared Memory Segment:** A block of memory allocated by one process (the "owner") that can be accessed by other processes.
+2. **Synchronization Mechanisms:** Semaphores or mutexes to ensure that multiple processes do not simultaneously modify the shared memory, which could lead to race conditions and data corruption.
+
+#### Implementation Steps
+
+1. **Creating Shared Memory:**
+   - The Controller Core Logic process creates a shared memory segment using system calls (e.g., `shmget` in Unix-like systems).
+   - Example (in C):
+     ```c
+     int shm_id = shmget(IPC_PRIVATE, SHM_SIZE, IPC_CREAT | 0666);
+     if (shm_id < 0) {
+         perror("shmget");
+         exit(1);
+     }
+     ```
+
+2. **Attaching Shared Memory:**
+   - Processes that need to access the shared memory segment attach it to their address space using system calls (e.g., `shmat` in Unix-like systems).
+   - Example (in C):
+     ```c
+     char *shm_addr = (char *) shmat(shm_id, NULL, 0);
+     if (shm_addr == (char *) -1) {
+         perror("shmat");
+         exit(1);
+     }
+     ```
+
+3. **Synchronization:**
+   - Use semaphores or mutexes to control access to the shared memory segment.
+   - Example (using POSIX semaphores in C):
+     ```c
+     sem_t *sem = sem_open("/shm_sem", O_CREAT, 0644, 1);
+     if (sem == SEM_FAILED) {
+         perror("sem_open");
+         exit(1);
+     }
+     ```
+
+4. **Reading and Writing:**
+   - Processes can read from and write to the shared memory segment. Synchronization ensures that only one process writes at a time.
+   - Example:
+     ```c
+     sem_wait(sem); // Lock
+     strcpy(shm_addr, "data to share");
+     sem_post(sem); // Unlock
+     ```
+
+5. **Detaching and Destroying:**
+   - When done, processes detach the shared memory segment and, if necessary, destroy it.
+   - Example (in C):
+     ```c
+     shmdt(shm_addr);
+     shmctl(shm_id, IPC_RMID, NULL);
+     sem_close(sem);
+     sem_unlink("/shm_sem");
+     ```
+
+### Use Case in Osiris
+
+#### Communication between Controller Core Logic (Team 1) and Controller Scalability and Load Balancing (Team 2)
+
+1. **Shared Data:**
+   - **Metrics and State Information:** Shared memory can be used to store metrics and state information that both core logic and scalability functions need to access quickly.
+   - Example: Load metrics, resource usage statistics, and scaling decisions.
+
+2. **Workflow:**
+   - **Step 1:** The Controller Core Logic process (Team 1) creates and initializes a shared memory segment to store metrics.
+   - **Step 2:** Both processes (Team 1 and Team 2) attach to the shared memory segment during their initialization.
+   - **Step 3:** The Controller Core Logic process updates the metrics in the shared memory segment.
+   - **Step 4:** The Controller Scalability and Load Balancing process reads the metrics, performs calculations, and updates the scaling state as necessary.
+   - **Step 5:** Synchronization mechanisms ensure that updates to the shared memory segment are performed safely.
+
+### Detailed Description of Named Pipes (FIFO) Communication
+
+#### Overview
+
+Named pipes, also known as FIFOs (First In, First Out), are a form of inter-process communication (IPC) that allows data to be passed between processes. Unlike anonymous pipes, named pipes have a presence in the filesystem and can be used to communicate between unrelated processes. Named pipes are useful for simple, stream-oriented data exchange and are especially effective for command/response patterns.
+
+#### Key Components
+
+1. **Named Pipe (FIFO):** A special type of file that exists in the filesystem, allowing two or more processes to communicate.
+2. **Reader Process:** The process that reads data from the named pipe.
+3. **Writer Process:** The process that writes data to the named pipe.
+
+#### Implementation Steps
+
+1. **Creating Named Pipes:**
+   - Named pipes are created using the `mkfifo` command in Unix-like systems or using appropriate system calls in a program.
+   - Example (in Unix shell):
+     ```sh
+     mkfifo /tmp/osiris_pipe
+     ```
+   - Example (in C):
+     ```c
+     #include <sys/types.h>
+     #include <sys/stat.h>
+
+     if (mkfifo("/tmp/osiris_pipe", 0666) == -1) {
+         perror("mkfifo");
+         exit(1);
+     }
+     ```
+
+2. **Opening Named Pipes:**
+   - Processes open the named pipe for reading or writing using standard file operations.
+   - Example (in C):
+     ```c
+     int fd = open("/tmp/osiris_pipe", O_WRONLY);
+     if (fd == -1) {
+         perror("open");
+         exit(1);
+     }
+     ```
+
+3. **Writing to Named Pipes:**
+   - The writer process writes data to the named pipe using standard write operations.
+   - Example (in C):
+     ```c
+     const char *data = "Hello, Osiris!";
+     write(fd, data, strlen(data) + 1);
+     ```
+
+4. **Reading from Named Pipes:**
+   - The reader process reads data from the named pipe using standard read operations.
+   - Example (in C):
+     ```c
+     char buffer[128];
+     int fd = open("/tmp/osiris_pipe", O_RDONLY);
+     if (fd == -1) {
+         perror("open");
+         exit(1);
+     }
+     read(fd, buffer, sizeof(buffer));
+     printf("Received: %s\n", buffer);
+     ```
+
+5. **Closing Named Pipes:**
+   - Both reader and writer processes close the named pipe when done.
+   - Example (in C):
+     ```c
+     close(fd);
+     ```
+
+### Use Case in Osiris
+
+#### Communication between Components Using Named Pipes
+
+Named pipes are ideal for communication between processes where simplicity and unidirectional data flow are sufficient. In the Osiris platform, named pipes can be used for communication between various teams where command/response interactions are required.
+
+#### Example Workflow: CLI and Controller
+
+1. **CLI to Controller Communication:**
+   - **Step 1:** The CLI process writes a command to a named pipe.
+     - CLI code:
+       ```c
+       int fd = open("/tmp/cli_to_controller", O_WRONLY);
+       const char *command = "deploy_function";
+       write(fd, command, strlen(command) + 1);
+       close(fd);
+       ```
+
+   - **Step 2:** The Controller process reads the command from the named pipe.
+     - Controller code:
+       ```c
+       char buffer[128];
+       int fd = open("/tmp/cli_to_controller", O_RDONLY);
+       read(fd, buffer, sizeof(buffer));
+       printf("Command received: %s\n", buffer);
+       close(fd);
+       ```
+
+2. **Controller to CLI Response:**
+   - **Step 3:** The Controller process writes a response to another named pipe.
+     - Controller code:
+       ```c
+       int fd = open("/tmp/controller_to_cli", O_WRONLY);
+       const char *response = "function_deployed";
+       write(fd, response, strlen(response) + 1);
+       close(fd);
+       ```
+
+   - **Step 4:** The CLI process reads the response from the named pipe.
+     - CLI code:
+       ```c
+       char buffer[128];
+       int fd = open("/tmp/controller_to_cli", O_RDONLY);
+       read(fd, buffer, sizeof(buffer));
+       printf("Response received: %s\n", buffer);
+       close(fd);
+       ```
