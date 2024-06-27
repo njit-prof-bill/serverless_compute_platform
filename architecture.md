@@ -530,3 +530,175 @@ Named pipes are ideal for communication between processes where simplicity and u
        printf("Response received: %s\n", buffer);
        close(fd);
        ```
+
+### Detailed Description of Function Calls for Intra-Process Communication
+
+#### Overview
+
+Function calls are the most direct and efficient method of communication between components within the same process. By using function calls, components can interact with each other through well-defined interfaces, ensuring tight coupling and low overhead. This method is particularly suitable for components that are closely related and reside within the same service or application boundary.
+
+#### Key Concepts
+
+1. **Function Definition:** Functions are defined with specific inputs and outputs, and they encapsulate the logic to perform particular tasks.
+2. **Function Invocation:** One component calls a function defined in another component, passing the necessary arguments and receiving the results.
+3. **Modularization:** Components expose functions through well-defined interfaces, promoting modularity and reusability.
+
+#### Implementation Steps
+
+1. **Define Interfaces:**
+   - Define clear interfaces for the functions that will be exposed by each component. This includes specifying the function signatures (i.e., the parameters and return types).
+
+   Example (in Python):
+   ```python
+   def deploy_function(function_code: str, function_name: str) -> bool:
+       pass
+
+   def get_function_status(function_name: str) -> str:
+       pass
+   ```
+
+2. **Implement Functions:**
+   - Implement the functions in the respective components, ensuring they adhere to the defined interfaces.
+
+   Example (in Python):
+   ```python
+   def deploy_function(function_code: str, function_name: str) -> bool:
+       # Logic to deploy the function
+       success = True
+       # ... deployment logic ...
+       return success
+
+   def get_function_status(function_name: str) -> str:
+       # Logic to get the status of the function
+       status = "running"
+       # ... status retrieval logic ...
+       return status
+   ```
+
+3. **Expose Functions:**
+   - Expose the functions through a public interface or module, making them accessible to other components within the same process.
+
+   Example (in Python):
+   ```python
+   class FunctionManager:
+       @staticmethod
+       def deploy_function(function_code: str, function_name: str) -> bool:
+           # Logic to deploy the function
+           success = True
+           # ... deployment logic ...
+           return success
+
+       @staticmethod
+       def get_function_status(function_name: str) -> str:
+           # Logic to get the status of the function
+           status = "running"
+           # ... status retrieval logic ...
+           return status
+   ```
+
+4. **Invoke Functions:**
+   - Invoke the functions from other components by calling the exposed methods and passing the required arguments.
+
+   Example (in Python):
+   ```python
+   # Invoking deploy_function
+   success = FunctionManager.deploy_function("def func(): pass", "my_function")
+   print(f"Function deployment successful: {success}")
+
+   # Invoking get_function_status
+   status = FunctionManager.get_function_status("my_function")
+   print(f"Function status: {status}")
+   ```
+
+5. **Handle Errors and Exceptions:**
+   - Implement proper error handling and exception management to ensure robust communication between components.
+
+   Example (in Python):
+   ```python
+   try:
+       success = FunctionManager.deploy_function("def func(): pass", "my_function")
+       if not success:
+           raise Exception("Function deployment failed")
+   except Exception as e:
+       print(f"Error: {e}")
+
+   try:
+       status = FunctionManager.get_function_status("my_function")
+       print(f"Function status: {status}")
+   except Exception as e:
+       print(f"Error: {e}")
+   ```
+
+### Use Case in Osiris
+
+#### Communication between CLI and Controller
+
+1. **CLI Commands to Controller:**
+   - The CLI component defines functions to handle user commands such as deploying a function or checking its status.
+   - These functions are implemented in the Controller component and exposed through a public interface.
+
+   Example (in Python):
+   ```python
+   # CLI component
+   class CLI:
+       def deploy(self, function_code: str, function_name: str):
+           success = Controller.deploy_function(function_code, function_name)
+           if success:
+               print("Function deployed successfully")
+           else:
+               print("Function deployment failed")
+
+       def status(self, function_name: str):
+           status = Controller.get_function_status(function_name)
+           print(f"Function status: {status}")
+
+   # Controller component
+   class Controller:
+       @staticmethod
+       def deploy_function(function_code: str, function_name: str) -> bool:
+           # Deployment logic
+           return True
+
+       @staticmethod
+       def get_function_status(function_name: str) -> str:
+           # Status retrieval logic
+           return "running"
+   ```
+
+2. **Invoking Controller Functions from CLI:**
+   - The CLI component calls the Controller functions to perform the desired actions.
+
+   Example (in Python):
+   ```python
+   cli = CLI()
+   cli.deploy("def func(): pass", "my_function")
+   cli.status("my_function")
+   ```
+
+3. **Error Handling:**
+   - Ensure robust error handling in both the CLI and Controller components to manage potential issues during function invocation.
+
+   Example (in Python):
+   ```python
+   class CLI:
+       def deploy(self, function_code: str, function_name: str):
+           try:
+               success = Controller.deploy_function(function_code, function_name)
+               if success:
+                   print("Function deployed successfully")
+               else:
+                   print("Function deployment failed")
+           except Exception as e:
+               print(f"Error deploying function: {e}")
+
+       def status(self, function_name: str):
+           try:
+               status = Controller.get_function_status(function_name)
+               print(f"Function status: {status}")
+           except Exception as e:
+               print(f"Error retrieving function status: {e}")
+   ```
+
+### Summary
+
+Function calls are an efficient method for intra-process communication, enabling direct interaction between components within the same application or service boundary. By defining clear interfaces, implementing robust functions, and handling errors appropriately, components can communicate effectively and efficiently. This approach is particularly useful for tightly coupled components in the Osiris platform, ensuring seamless and low-overhead communication.
