@@ -308,22 +308,22 @@ For simpler communication needs:
 
 |                   | Team 1 | Team 2 | Team 3 | Team 4 | Team 5 | Team 6 | Team 7 | Team 8 | Team 9 | Team 10 | Team 11 | Team 12 | Team 13 | Team 14 | Team 15 | Team 16 |
 |-------------------|--------|--------|--------|--------|--------|--------|--------|--------|--------|---------|---------|---------|---------|---------|---------|---------|
-| **Team 1**        | N      | Y (SM) | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   |
-| **Team 2**        | Y (SM) | N      | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   |
-| **Team 3**        | Y (P)  | Y (P)  | N      | Y (F)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | N      | N       | N       | N       | N       | N       | N       | N       |
-| **Team 4**        | Y (P)  | Y (P)  | Y (F)  | N      | Y (P)  | Y (P)  | Y (P)  | Y (P)  | N      | N       | N       | N       | N       | N       | N       | N       |
-| **Team 5**        | Y (P)  | Y (P)  | Y (P)  | Y (P)  | N      | Y (F)  | Y (P)  | Y (P)  | N      | N       | N       | N       | N       | N       | N       | N       |
-| **Team 6**        | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (F)  | N      | Y (P)  | Y (P)  | N      | N       | N       | N       | N       | N       | N       | N       |
-| **Team 7**        | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | N      | Y (P)  | N      | N       | N       | N       | N       | N       | N       | N       |
-| **Team 8**        | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | N      | N      | N       | N       | N       | N       | N       | N       | N       |
-| **Team 9**        | Y (P)  | Y (P)  | N      | N      | N      | N      | N      | N      | N      | Y (P)   | N       | N       | N       | N       | N       | N       |
-| **Team 10**       | Y (P)  | Y (P)  | N      | N      | N      | N      | N      | N      | Y (P)  | N       | N       | N       | N       | N       | N       | N       |
-| **Team 11**       | Y (P)  | Y (P)  | N      | N      | N      | N      | N      | N      | N      | N       | N       | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   |
-| **Team 12**       | Y (P)  | Y (P)  | N      | N      | N      | N      | N      | N      | N      | N       | Y (P)   | N       | Y (P)   | Y (P)   | Y (P)   | Y (P)   |
-| **Team 13**       | Y (P)  | Y (P)  | N      | N      | N      | N      | N      | N      | N      | N       | Y (P)   | Y (P)   | N       | Y (P)   | Y (P)   | Y (P)   |
-| **Team 14**       | Y (P)  | Y (P)  | N      | N      | N      | N      | N      | N      | N      | N       | Y (P)   | Y (P)   | Y (P)   | N       | Y (P)   | Y (P)   |
-| **Team 15**       | Y (P)  | Y (P)  | N      | N      | N      | N      | N      | N      | N      | N       | Y (P)   | Y (P)   | Y (P)   | Y (P)   | N       | Y (P)   |
-| **Team 16**       | Y (P)  | Y (P)  | N      | N      | N      | N      | N      | N      | N      | N       | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   | N       |
+| **Team 1**        | -      | Y (SM) | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   |
+| **Team 2**        |        | -      | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   |
+| **Team 3**        |        |        | -      | Y (F)  | Y (P)  | Y (P)  | Y (P)  | Y (P)  | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 4**        |        |        |        | -      | Y (P)  | Y (P)  | Y (P)  | Y (P)  | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 5**        |        |        |        |        | -      | Y (F)  | Y (P)  | Y (P)  | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 6**        |        |        |        |        |        | -      | Y (P)  | Y (P)  | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 7**        |        |        |        |        |        |        | -      | Y (P)  | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 8**        |        |        |        |        |        |        |        | -      | N      | N       | N       | N       | N       | N       | N       | N       |
+| **Team 9**        |        |        |        |        |        |        |        |        | -      | Y (P)   | N       | N       | N       | N       | N       | N       |
+| **Team 10**       |        |        |        |        |        |        |        |        |        | -       | N       | N       | N       | N       | N       | N       |
+| **Team 11**       |        |        |        |        |        |        |        |        |        |         | -       | Y (P)   | Y (P)   | Y (P)   | Y (P)   | Y (P)   |
+| **Team 12**       |        |        |        |        |        |        |        |        |        |         |         | -       | Y (P)   | Y (P)   | Y (P)   | Y (P)   |
+| **Team 13**       |        |        |        |        |        |        |        |        |        |         |         |         | -       | Y (P)   | Y (P)   | Y (P)   |
+| **Team 14**       |        |        |        |        |        |        |        |        |        |         |         |         |         | -       | Y (P)   | Y (P)   |
+| **Team 15**       |        |        |        |        |        |        |        |        |        |         |         |         |         |         | -       | Y (P)   |
+| **Team 16**       |        |        |        |        |        |        |        |        |        |         |         |         |         |         |         | -       |
 
 ### Legend
 - **SM:** Shared Memory
