@@ -1,3 +1,5 @@
+[Back to home.](./README.md)
+
 ### Osiris Platform Detailed Technical Requirements
 
 #### Overview
@@ -702,3 +704,5 @@ Function calls are the most direct and efficient method of communication between
 ### Summary
 
 Function calls are an efficient method for intra-process communication, enabling direct interaction between components within the same application or service boundary. By defining clear interfaces, implementing robust functions, and handling errors appropriately, components can communicate effectively and efficiently. This approach is particularly useful for tightly coupled components in the Osiris platform, ensuring seamless and low-overhead communication.
+
+[Back to home.](./README.md)

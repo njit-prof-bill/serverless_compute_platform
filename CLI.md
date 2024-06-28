@@ -1,3 +1,5 @@
+[Back to home.](./README.md)
+
 ### Basic CLI Commands for Osiris
 
 The CLI for Osiris should provide a comprehensive set of commands to manage the lifecycle of functions, monitor the platform, and handle administrative tasks. Below are the basic commands that will be necessary:
@@ -157,3 +159,5 @@ The CLI for Osiris should provide a comprehensive set of commands to manage the 
    ```sh
    osiris stop
    ```
+
+[Back to home.](./README.md)

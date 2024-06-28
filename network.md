@@ -1,3 +1,5 @@
+[Back to home.](./README.md)
+
 ### Container Communication in Osiris
 
 For a scalable, cloud-agnostic platform like Osiris, efficient and reliable inter-container communication is crucial. Each communication protocol (REST, GraphQL, gRPC) has its strengths and weaknesses. Here’s an analysis to help decide which protocol to use:
@@ -108,3 +110,5 @@ Given the need for high performance, efficient communication, and the ability to
 ### Summary
 
 By choosing gRPC for inter-container communication, Osiris can achieve high performance, low latency, and efficient communication, which are essential for a scalable, serverless compute platform. The controller will manage traffic, service discovery, and routing, ensuring seamless integration and operation of all components. This approach leverages the strengths of gRPC to provide a robust and efficient communication backbone for the platform.
+
+[Back to home.](./README.md)

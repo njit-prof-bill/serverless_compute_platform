@@ -1,3 +1,5 @@
+[Back to home.](./README.md)
+
 To break down the Osiris project into 16 self-contained sub-projects for small cross-functional teams, we can indeed split larger components into smaller sub-projects and introduce additional scope for comprehensive functionality. Here is an organized list of 16 sub-projects, ensuring each team has clear and manageable tasks.
 
 ### Proposed Team Structure
@@ -104,3 +106,5 @@ The proposed team structure aims to distribute the work as evenly as possible am
 ### Summary
 
 The proposed team structure and distribution of work appear to be reasonably balanced, with each team having a mix of moderate and significant tasks. However, it is essential to monitor progress and be flexible to reallocate resources if some teams face more challenges than anticipated. Regular check-ins and adjustments will help maintain an even workload distribution and ensure the successful completion of the Osiris prototype.
+
+[Back to home.](./README.md)
