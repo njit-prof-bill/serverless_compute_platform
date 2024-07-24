@@ -367,3 +367,5 @@ This approach should help streamline development, improve collaboration, and ens
 [Network Communication](./network.md)
 
 [Architecture](./architecture.md)
+
+[Interfaces](./interfaces.md)
