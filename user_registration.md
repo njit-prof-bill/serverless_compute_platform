@@ -1,3 +1,5 @@
+[Back to home.](./README.md)
+
 ### Registration and Authentication Proposal with Federated IAM Integration
 
 #### Overview
