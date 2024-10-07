@@ -369,3 +369,5 @@ This approach should help streamline development, improve collaboration, and ens
 [Architecture](./architecture.md)
 
 [Interfaces](./interfaces.md)
+
+[Tasks for Teams](./team_tasks.md)
