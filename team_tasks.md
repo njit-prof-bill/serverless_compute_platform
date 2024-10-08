@@ -93,12 +93,12 @@ The proposed team structure aims to distribute the work as evenly as possible am
 **Complexity:** Medium to High
 **Effort:** Considerable
 **Responsibilities:** Basic portal features, usability, reliability.
-- **Team 15: Admin Portal Advanced Features**
+- **(Optional Feature): Admin Portal Advanced Features**
 **Complexity:** High
 **Effort:** Significant
 **Responsibilities:** Implementing analytics, advanced features, in-depth development, and testing.
 9. **Innovative Code Generation**
-- **Team 16: Code Generation from Natural Language**
+- **Team 15: Code Generation from Natural Language**
 **Complexity:** High
 **Effort:** Significant
 **Responsibilities:** Developing the LLM-based code generation feature, ensuring accurate code generation and deployment.
