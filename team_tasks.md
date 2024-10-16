@@ -18,8 +18,9 @@ To break down the Osiris project into 16 self-contained sub-projects for small c
 - **Team 12:** Index Ledger Core Implementation
 - **Team 13:** Index Ledger Synchronization and Consistency
 - **Team 14:** Admin Portal Core Features
-- **Team 15:** Admin Portal Advanced Features
-- **Team 16:** Code Generation from Natural Language
+- **Team 15:** Code Generation from Natural Language
+- **Optional:** Admin Portal Advanced Features
+
 
 Each team will also be responsible for integration and testing within their respective domains, ensuring that all components fit together seamlessly to create a fully functional prototype of the Osiris platform.
 
