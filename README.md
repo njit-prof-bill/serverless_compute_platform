@@ -153,39 +153,39 @@ Given the team structure and projects they are working on, it's important to org
 osiris-core/
 │
 ├── controller/
-│   ├── core/
+│   ├── core/ (Team 1)
 │   │   ├── src/
 │   │   ├── tests/
 │   │   └── Dockerfile
-│   ├── scalability/
+│   ├── scalability/ (Team 2)
 │   │   ├── src/
 │   │   ├── tests/
 │   │   └── Dockerfile
 │   └── README.md
 │
 ├── cli/
-│   ├── core/
+│   ├── core/ (Team 3)
 │   │   ├── src/
 │   │   ├── tests/
 │   │   └── Dockerfile
-│   ├── user-management/
+│   ├── user-management/ (Team 4)
 │   │   ├── src/
 │   │   ├── tests/
 │   │   └── Dockerfile
 │   └── README.md
 │
 ├── client-sdk/
-│   ├── core/
+│   ├── core/ (Team 5)
 │   │   ├── src/
 │   │   ├── tests/
 │   │   └── Dockerfile
-│   ├── advanced-features/
+│   ├── advanced-features/ (Team 6)
 │   │   ├── src/
 │   │   ├── tests/
 │   │   └── Dockerfile
 │   └── README.md
 │
-├── function-sdk/
+├── function-sdk/ (Team 7)
 │   ├── core/
 │   │   ├── src/
 │   │   ├── tests/
@@ -206,12 +206,12 @@ osiris-core/
 ```
 osiris-infrastructure/
 │
-├── docker/
+├── docker/ (Team 8)
 │   ├── core/
 │   ├── management/
 │   └── README.md
 │
-├── terraform/
+├── terraform/ (Team 9)
 │   ├── scripts/
 │   └── README.md
 │
@@ -223,12 +223,12 @@ osiris-infrastructure/
 ```
 osiris-function-library/
 │
-├── core-management/
+├── core-management/ (Team 10)
 │   ├── src/
 │   ├── tests/
 │   └── Dockerfile
 │
-├── versioning-rollback/
+├── versioning-rollback/ (Team 11)
 │   ├── src/
 │   ├── tests/
 │   └── Dockerfile
@@ -241,12 +241,12 @@ osiris-function-library/
 ```
 osiris-index-ledger/
 │
-├── core-implementation/
+├── core-implementation/ (Team 12)
 │   ├── src/
 │   ├── tests/
 │   └── Dockerfile
 │
-├── synchronization-consistency/
+├── synchronization-consistency/ (Team 13)
 │   ├── src/
 │   ├── tests/
 │   └── Dockerfile
@@ -259,7 +259,7 @@ osiris-index-ledger/
 ```
 osiris-admin-portal/
 │
-├── core-features/
+├── core-features/ (Team 14)
 │   ├── src/
 │   ├── tests/
 │   └── Dockerfile
@@ -269,6 +269,21 @@ osiris-admin-portal/
 │   ├── tests/
 │   └── Dockerfile
 │
+└── README.md
+```
+
+**Repository:** `osiris-code-generation`
+**Structure:**
+```
+osiris-code-generation/ (Team 15)
+├── core/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
+├── advanced/
+│   ├── src/
+│   ├── tests/
+│   └── Dockerfile
 └── README.md
 ```
 
