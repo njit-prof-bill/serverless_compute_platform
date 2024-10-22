@@ -300,13 +300,112 @@ response = invokeWithRetry("addNumbers", 3, 5, retries=3)
 response = 8
 ```
 
----
-
-### API 9: Invoke Function Asynchronously Command
+### API 9: Invoke Function Asynchronously
 
 **Problem:**
-Implement the `invokeFunctionAsync` API in the Function SDK, which allows invoking a function asynchronously.
+Implement the `invokeFunctionAsync` API in the Function SDK, which allows a function to be invoked asynchronously on the Osiris platform.
 
 **Type:** Function
 
-**Function Signature:
+**Function Signature:**
+```python
+async def invokeFunctionAsync(function_name: str, input_data: dict) -> str:
+    pass
+```
+
+**Description:**
+- The `invokeFunctionAsync` API asynchronously invokes a function deployed on the Osiris platform, allowing the caller to continue with other tasks without waiting for the function to complete.
+- The function returns a `request_id` that can be used to track the status or result of the function invocation later.
+
+**Input:**
+- `function_name`: The name of the function to be invoked. (string)
+- `input_data`: A dictionary containing the input arguments for the function. (dict)
+
+**Output:**
+- A `request_id` (string) that uniquely identifies the function invocation and can be used to retrieve the result or check the status later.
+
+**Sample Input:**
+```python
+input_data = {
+    "a": 10,
+    "b": 5
+}
+request_id = await invokeFunctionAsync("addNumbers", input_data)
+```
+
+**Sample Output:**
+```python
+request_id = "request-7890abcd"
+```
+
+---
+
+### API 10: Check Function Status
+
+**Problem:**
+Implement the `checkFunctionStatus` API in the Function SDK, which checks the status of a previously invoked function.
+
+**Type:** Function
+
+**Function Signature:**
+```python
+def checkFunctionStatus(request_id: str) -> str:
+    pass
+```
+
+**Description:**
+- The `checkFunctionStatus` API checks the current status of a function invocation using the `request_id` returned by `invokeFunctionAsync`.
+- The status could be one of `"pending"`, `"running"`, `"completed"`, or `"failed"`.
+
+**Input:**
+- `request_id`: The unique identifier of the function invocation. (string)
+
+**Output:**
+- The current status of the function invocation (string).
+
+**Sample Input:**
+```python
+status = checkFunctionStatus("request-7890abcd")
+```
+
+**Sample Output:**
+```python
+status = "completed"
+```
+
+---
+
+### API 11: Get Function Result
+
+**Problem:**
+Implement the `getFunctionResultAsync` API in the Function SDK, which retrieves the result of a function invocation made asynchronously.
+
+**Type:** Function
+
+**Function Signature:**
+```python
+async def getFunctionResultAsync(request_id: str) -> dict:
+    pass
+```
+
+**Description:**
+- The `getFunctionResultAsync` API retrieves the result of a function invocation using the `request_id`.
+- If the function has not yet completed, the API will wait until the result is available.
+
+**Input:**
+- `request_id`: The unique identifier of the function invocation. (string)
+
+**Output:**
+- A dictionary containing the result of the function invocation (dict).
+
+**Sample Input:**
+```python
+result = await getFunctionResultAsync("request-7890abcd")
+```
+
+**Sample Output:**
+```python
+result = {
+    "result": 15
+}
+```
