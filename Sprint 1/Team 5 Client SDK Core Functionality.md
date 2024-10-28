@@ -349,9 +349,9 @@ https://trello.com/invite/b/671e9313531e58561197c45f/ATTI3d945370511e4bb15adf9e0
 ---
 
 ### Team Assignments:
-Justin Abraham:<br>
-Alexandra Drzewosz:<br>
-Valliammai Janakiraman:<br>
-Justin Nguyen:<br>
-Joshua Rosillo:<br>
-Nirbhav Talloju:
+Justin Abraham: API 4 & 5<br>
+Alexandra Drzewosz: API 8<br>
+Valliammai Janakiraman: API 7<br>
+Justin Nguyen: API 6 & 9<br>
+Joshua Rosillo: API 2<br>
+Nirbhav Talloju: API 1 & 3
