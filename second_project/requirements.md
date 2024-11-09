@@ -1,6 +1,6 @@
 
-### **AI-Powered Resume Analyzer and Job Matcher**
-## **Introduction**
+## **AI-Powered Resume Analyzer and Job Matcher**
+### **Introduction**
    - **Description**: A platform where users can upload resumes and receive feedback on improving them, with personalized job recommendations based on resume content.
    - **Tech Stack**: Backend for handling resumes and feedback; an API to communicate between the front end and NLP model.
    - **New Technology**: Natural Language Processing (NLP) to analyze resumes, along with machine learning to match jobs to resume keywords and skills.
@@ -8,14 +8,11 @@
 
 ---
 
-## **Summary**
+### **Summary**
    - **Summary**: This app would enable students to upload their resumes and receive AI-driven feedback, such as suggestions on wording, structure, and missing skills. Additionally, it could recommend job listings or career paths based on the resume’s content, comparing keywords and skills with job market trends.
    - **Technical Focus**: The project would use Natural Language Processing (NLP) to analyze and parse resume text, along with machine learning techniques to offer job recommendations or skill gap analysis.
    - **Core Skills Developed**: Parsing and analyzing text with NLP, managing sensitive data securely, designing a user-friendly feedback system, and integrating job recommendation APIs or data sources.
 
----
-
-## **AI-Powered Resume Analyzer and Job Matcher**
    - **Core MVP Features**:
      - Upload resume functionality with simple text parsing.
      - Basic NLP analysis to highlight missing skills or format suggestions (focusing on predefined keywords).
